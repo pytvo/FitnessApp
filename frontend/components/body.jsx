@@ -7,20 +7,8 @@ export default function Body() {
   const router = useRouter();
   return (
     <View>
-        <TouchableOpacity onPress = {() => console.log('press')} className = "items-center bg-neutral-400 justify-center self-center rounded-[30px] mb-4" style = {{height: hp(10), width: wp(90)}}>
-            <Text>Steps</Text>
-        </TouchableOpacity>
-        <View className = "items-center bg-neutral-400 justify-center self-center rounded-[30px] mb-4" style = {{height: hp(10), width: wp(90)}} >
-            <Text>Distance</Text>
-        </View>
-        <View className = "items-center bg-neutral-400 justify-center self-center rounded-[30px] mb-4" style = {{height: hp(10), width: wp(90)}} >
-            <Text>Calories</Text>
-        </View>
-        <View className = "items-center bg-neutral-400 justify-center self-center rounded-[30px] mb-4" style = {{height: hp(10), width: wp(90)}} >
-            <Text>Test</Text>
-        </View>
-        <View className = "items-center bg-neutral-400 justify-center self-center rounded-[30px] " style = {{height: hp(10), width: wp(90)}} >
-            <Text>Test</Text>
+        <View className = "flex border-b-2 border-neutral-500">
+            <Text style = {{fontSize:hp(5), height: hp(10)}} className = "text-white text-bold ">15,160</Text>
         </View>
     </View>
   )
