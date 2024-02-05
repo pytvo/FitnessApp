@@ -4,7 +4,6 @@ from .manages import CustomUserManager
 from django.utils import timezone
 
 
-
 # ! User and Related Stuff
 class Sex(models.Model):
     gender = models.CharField(max_length=128)
@@ -94,6 +93,7 @@ class StepsCount(models.Model):
         
 class MuscleGroups(models.Model):
     name = models.CharField(max_length=128)
+    photo = models.ImageField(upload_to='Muscles', null=True, blank=True)
     slug = models.SlugField(max_length=128)
 
     def __str__(self):
@@ -106,6 +106,7 @@ class MuscleGroups(models.Model):
 class Exercise(models.Model):
     name = models.CharField(max_length=128)
     muscle_group = models.ManyToManyField(MuscleGroups, related_name='muscles')
+    photo = models.ImageField(upload_to='exercises/', null=True, blank=True)
     description = models.TextField()
     cal_per_min = models.IntegerField()
     slug = models.SlugField(max_length=129)
@@ -120,13 +121,12 @@ class Exercise(models.Model):
 class ExerciseSet(models.Model):
     log = models.ForeignKey(UserWorkoutLog, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    files = models.FileField(upload_to='exercise/files/')
     set_numb = models.IntegerField()
     reps = models.IntegerField()
     rest = models.IntegerField()
 
     def __str__(self):
-        return f'{self.log.user.username} -- {self.exercise.name}'
+        return f'User and Exercise: {self.log.user.username} —— {self.exercise.name}'
     
     class Meta:
         verbose_name = 'Exercise Set'
