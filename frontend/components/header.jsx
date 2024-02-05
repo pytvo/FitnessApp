@@ -4,9 +4,13 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 export default function Header() {
   return (
-    <View className = "border-b-2 border-neutral-400 justify-center">
-      <Text style = {{fontSize: hp(4)}} className = "text-white mb-1">Hello, <Text className = "text-bold">Oleh</Text></Text>
-      <Image source = {require('../assets/images/portrait-white-man-isolated.jpg')} style = {{width: wp(10), height: wp(10)}} className = "rounded-full absolute self-end" />
+    <View className = "border-b-2 border-neutral-500 justify-center flex-row">
+      <View className = 'flex-1 items-start'>
+        <Text style = {{fontSize: hp(4)}} className = "text-white mb-1">Hello, <Text className = "font-semibold">Oleh</Text></Text>
+      </View>
+      <View className = "items-end">
+        <Image className = "rounded-full" source = {require('../assets/images/portrait-white-man-isolated.jpg')} style = {{width: wp(10), height: wp(10)}}/>
+      </View>
     </View>
-  )
+  )  
 }
