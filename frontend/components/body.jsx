@@ -12,10 +12,24 @@ export default function Body() {
         </View>
         <View className = "items-end justify-center">
           <Text className = "text-neutral-300"> Today's goal</Text>
-          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#50ecda'}}>6000</Text>
+          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>6000</Text>
         </View>
       </View>
       <Flowchart />
+      <View className = "border-neutral-500 border-b-2 justify-between flex-row items-center" style = {{height: hp(6)}}>
+        <View className = "">
+          <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}}>FLOORS</Text>
+          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>14</Text>
+        </View>
+        <View className = "">
+          <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}} >CALORIES</Text>
+          <Text className = "font-semibold self-center" style = {{fontSize: hp(2), color: '#58ecdc'}}>604</Text>
+        </View>
+        <View className = "">
+          <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}}>DISTANCE</Text>
+          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>7.2km</Text>
+        </View>
+      </View>
     </View>
   )
 }
