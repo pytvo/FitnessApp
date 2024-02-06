@@ -10,6 +10,10 @@ djongo = "===1.3.3"
 djangorestframework = "===3.11.2"
 pycryptodome = "*"
 django-rest-swagger = "*"
+djoser = "*"
+djangorestframework-simplejwt = "*"
+social-auth-app-django = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

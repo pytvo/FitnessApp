@@ -1,4 +1,6 @@
+from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +24,10 @@ INSTALLED_APPS = [
     'FitnessAPI',
 
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'drf_yasg',
+    'djoser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +47,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'FitnessApp.urls'
-import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -78,7 +83,53 @@ DATABASES = {
     }
 }
 
+# Authentication
+
 AUTH_USER_MODEL = "FitnessAPI.User"
+ACCOUNT_SERIALIZER = 'FitnessAPI.serializers.UserCreateSerializer'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SERIALIZERS': {
+        'user_create': ACCOUNT_SERIALIZER,
+        'user': ACCOUNT_SERIALIZER,
+        'current_user': ACCOUNT_SERIALIZER,
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
+    }
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+#    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+#    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+#    'AUTH_TOKEN_CLASSES': (
+#        'rest_framework_simplejwt.tokens.AccessToken',
+#    )
+}
+
+EMAIL_USE_TLS =True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sichkooleh@gmail.com'
+EMAIL_HOST_PASSWORD = 'njxo gjpe mmqu mcvq'
+EMAIL_PORT = 587
+
+DOMAIN = ("localhost:8000")  # For Production in Future
+SITE_NAME = ('Fitness App')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 
 # Password validation
