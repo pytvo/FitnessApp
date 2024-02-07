@@ -82,19 +82,6 @@ export default function Flowchart() {
         <View className = "border-b-2 border-neutral-500" style = {{height: hp(25)}}>
         <View style = {{height: hp(20), paddingTop: hp(2)}}>
           <Svg>
-            <G>
-            {dashes.map((_, index) => (
-                <Rect
-                    key={index}
-                    x = {wp(2)}
-                    y="40%"
-                    width="10"
-                    height="1"
-                    fill="gray"
-                    translateX= {[16 * index]}
-                />
-            ))}
-            </G>
             {/* Розділити на 2.5 щоб було максимум 250% */}
             {/* Monday */}
             <AnimatedRect x = {wp(2)} y = {`${-limitedProgress + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
@@ -117,6 +104,19 @@ export default function Flowchart() {
             {/* Sunday */}
             <AnimatedRect x = {wp(80)} y = {`${-progressSun + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(80)} y = "100%" width = {wp(12)} animatedProps={animatedPropsSun} fill = "#204444" opacity={1}/>
+            <G>
+            {dashes.map((_, index) => (
+                <Rect
+                    key={index}
+                    x = {wp(2)}
+                    y="40%"
+                    width="8"
+                    height="1"
+                    fill="#fff"
+                    translateX= {[15.7 * index]}
+                />
+            ))}
+            </G>
           </Svg>
         </View>
         <View className = "flex-row mt-1" style = {{marginLeft: wp(2)}}>
