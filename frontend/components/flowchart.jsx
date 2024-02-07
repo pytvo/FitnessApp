@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, { useEffect } from 'react'
-import Svg, { Rect, G } from 'react-native-svg'
+import Svg, { Rect, G, TSpan } from 'react-native-svg'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated'
 
@@ -84,24 +84,45 @@ export default function Flowchart() {
           <Svg>
             {/* Розділити на 2.5 щоб було максимум 250% */}
             {/* Monday */}
+            <TSpan fill={today === 'MON' ? '#fff' : '#000'} dy="9" x={wp(2)} y = {`${-limitedProgress + 85}%`}>
+                    <TSpan>{limitedProgress}%</TSpan>
+            </TSpan>
             <AnimatedRect x = {wp(2)} y = {`${-limitedProgress + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(2)} y = "100%" width = {wp(12)} animatedProps={animatedPropsMon} fill = "#204444" opacity = {1} />
             {/* Tuesday */}
+            <TSpan fill={today === 'TUE' ? '#fff' : '#000'} dy="9" x={wp(15)} y = {`${-progressTue + 85}%`}>
+                    <TSpan>{progressTue}%</TSpan>
+            </TSpan>
             <AnimatedRect x = {wp(15)} y = {`${-progressTue + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(15)} y = "100%" width = {wp(12)} animatedProps = {animatedPropsTue} fill = "#204444" opacity={1}/>
             {/* Wednesday */}
+            <TSpan fill={today === 'WED' ? '#fff' : '#000'} dy="9" x={wp(28)} y = {`${-progressWed + 85}%`}>
+                    <TSpan>{progressWed}%</TSpan>
+            </TSpan>
             <AnimatedRect x = {wp(28)} y = {`${-progressWed + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(28)} y = "100%" width = {wp(12)} animatedProps={animatedPropsWed} fill = "#204444" opacity={1}/>
             {/* Thursday */}
+            <TSpan fill={today === 'THU' ? '#fff' : '#000'} dy="9" x={wp(41)} y = {`${-progressThu + 85}%`}>
+                    <TSpan>{progressThu}%</TSpan>
+            </TSpan>
             <AnimatedRect x = {wp(41)} y = {`${-progressThu + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(41)} y = "100%" width = {wp(12)} animatedProps={animatedPropsThu} fill = "#204444" opacity={1}/>
             {/* Friday */}
+            <TSpan fill={today === 'FRI' ? '#fff' : '#000'} dy="9" x={wp(54)} y = {`${-progressFri + 85}%`}>
+                    <TSpan>{progressFri}%</TSpan>
+            </TSpan>
             <AnimatedRect x = {wp(54)} y = {`${-progressFri + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(54)} y = "100%" width = {wp(12)} animatedProps={animatedPropsFri} fill = "#204444" opacity={1}/>
             {/* Saturday */}
+            <TSpan fill={today === 'SAT' ? '#fff' : '#000'} dy="9" x={wp(67)} y = {`${-progressSat + 85}%`}>
+                <TSpan>{progressSat}%</TSpan>
+            </TSpan>
             <AnimatedRect x = {wp(67)} y = {`${-progressSat + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(67)} y = "100%" width = {wp(12)} animatedProps={animatedPropsSat} fill = "#204444" opacity={1}/>
             {/* Sunday */}
+            <TSpan fill={today === 'SUN' ? '#fff' : '#000'} dy="9" x={wp(80)} y = {`${-progressSun + 85}%`}>
+                    <TSpan>{progressSun}%</TSpan>
+            </TSpan>
             <AnimatedRect x = {wp(80)} y = {`${-progressSun + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
             <AnimatedRect x = {wp(80)} y = "100%" width = {wp(12)} animatedProps={animatedPropsSun} fill = "#204444" opacity={1}/>
             <G>
