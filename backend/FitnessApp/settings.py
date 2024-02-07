@@ -116,8 +116,8 @@ SIMPLE_JWT = {
 
 EMAIL_USE_TLS =True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sichkooleh@gmail.com'
-EMAIL_HOST_PASSWORD = 'njxo gjpe mmqu mcvq'
+EMAIL_HOST_USER = 'email@gmail.com' # !!!!!! CHANGE THE CONFIGURATION WHEN DEV
+EMAIL_HOST_PASSWORD = 'somepass'  # !!!!!! CHANGE THE CONFIGURATION WHEN DEV
 EMAIL_PORT = 587
 
 DOMAIN = ("localhost:8000")  # For Production in Future
