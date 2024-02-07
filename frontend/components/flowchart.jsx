@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, { useEffect } from 'react'
-import Svg, {Rect} from 'react-native-svg'
+import Svg, { Rect, G } from 'react-native-svg'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated'
 
@@ -76,10 +76,25 @@ export default function Flowchart() {
         width: linefill.value
     }))
 
+    const dashes = new Array(Math.floor(wp(95) / 16)).fill(null);
+
     return (
         <View className = "border-b-2 border-neutral-500" style = {{height: hp(25)}}>
         <View style = {{height: hp(20), paddingTop: hp(2)}}>
           <Svg>
+            <G>
+            {dashes.map((_, index) => (
+                <Rect
+                    key={index}
+                    x = {wp(2)}
+                    y="40%"
+                    width="10"
+                    height="1"
+                    fill="gray"
+                    translateX= {[16 * index]}
+                />
+            ))}
+            </G>
             {/* Розділити на 2.5 щоб було максимум 250% */}
             {/* Monday */}
             <AnimatedRect x = {wp(2)} y = {`${-limitedProgress + 97}%`} animatedProps={lineProps} height = "1.5%" fill = "#58ecdc" opacity = {1} />
