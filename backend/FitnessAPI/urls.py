@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.SomethingView.as_view())
+    path('', views.WelcomeView.as_view()),
+    path('accounts/activation/<uid>/<token>/', views.ActivationView.as_view({'get':'activation'})),
 ]

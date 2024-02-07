@@ -93,25 +93,27 @@ AUTHENTICATION_BACKENDS = (
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'ACTIVATION_URL': 'accounts/activation/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SEND_CONFIRMATION_EMAIL': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'SERIALIZERS': {
         'user_create': ACCOUNT_SERIALIZER,
         'user': ACCOUNT_SERIALIZER,
-        'current_user': ACCOUNT_SERIALIZER,
+        'current_user': 'FitnessAPI.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
 }
 
+
+# This thing will be modified soon
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
-#    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
-#    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
-#    'AUTH_TOKEN_CLASSES': (
-#        'rest_framework_simplejwt.tokens.AccessToken',
-#    )
+   'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+   'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+   'AUTH_TOKEN_CLASSES': (
+       'rest_framework_simplejwt.tokens.AccessToken',
+   )
 }
 
 EMAIL_USE_TLS =True
