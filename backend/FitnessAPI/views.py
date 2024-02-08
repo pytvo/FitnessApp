@@ -1,14 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from rest_framework.decorators import permission_classes
 from rest_framework import status, permissions
 
 from djoser.views import UserViewSet
 from .serializers import UserFeedBackSerializer
 
 
-from .models import UserFeedback
+from .models import UserFeedback, User
 class WelcomeView(APIView):
     def get(self, request):
         return Response({'Welcome to our Fitness App API, where you can find data required for frontend'})
@@ -29,17 +28,26 @@ class ActivationView(UserViewSet):
     
 
 class UserFeedbackViewset(ViewSet):
+
     def get_queryset(self):
         return UserFeedback.objects.all()
+    
+    def get_permissions(self):
+        if self.action == 'get':
+            self.permission_classes = [permissions.IsAdminUser]
+        elif self.action == 'create':
+            self.permission_classes = [permissions.AllowAny] # ! For deploy --> [permissions.IsAuthenticated]
+        return super().get_permissions()
 
-    @permission_classes((permissions.IsAdminUser,))
     def get(self, request, *args, **kwargs):
         model = self.get_queryset()
         serializer = UserFeedBackSerializer(model, many=True)
         return Response(serializer.data)
 
-    @permission_classes((permissions.AllowAny)) # ! For deploy --> [permissions.IsAuthenticated]
     def create(self, request, *args, **kwargs):
+        request.data._mutable = True
+        request.data.update({'user':request.user.id})
+        request.data._mutable = False
         serializer = UserFeedBackSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
