@@ -15,6 +15,7 @@ class Sex(models.Model):
     class Meta:
         verbose_name = 'Gender'
         verbose_name_plural = 'Genders'
+
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
