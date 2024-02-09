@@ -4,10 +4,10 @@ from rest_framework.viewsets import ViewSet
 from rest_framework import status, permissions
 
 from djoser.views import UserViewSet
-from .serializers import UserFeedBackSerializer
+from .serializers import UserFeedBackSerializer, StepsCountSerializer, NutritionLogSerializer
 
 
-from .models import UserFeedback, User
+from .models import UserFeedback, StepsCount, NutritionLog
 class WelcomeView(APIView):
     def get(self, request):
         return Response({'Welcome to our Fitness App API, where you can find data required for frontend'})
@@ -52,3 +52,39 @@ class UserFeedbackViewset(ViewSet):
         if serializer.is_valid():
             serializer.save()
         return Response({'Success'}, status=status.HTTP_200_OK)
+    
+class StepsCountViewSet(ViewSet):
+    permission_classes = [permissions.IsAuthenticated] # ! For deploy --> [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return StepsCount.objects.filter(user=self.request.user)
+    
+    def get(self, request, *args, **kwargs):
+        model = self.get_queryset()
+        serializer = StepsCountSerializer(model, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request, *args, **kwargs):
+        request.data['user'] = request.user.id
+        serializer = StepsCountSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response({'Success':request.data}, status=status.HTTP_200_OK)
+    
+class NutritionLogViewSet(ViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return NutritionLog.objects.filter(user=self.request.user)
+    
+    def get(self, request, *args, **kwargs):
+        model = self.get_queryset()
+        serializer = NutritionLogSerializer(model, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request, *args, **kwargs):
+        request.data['user'] = request.user.id
+        serializer = NutritionLogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response({'Success':request.data}, status=status.HTTP_200_OK)
