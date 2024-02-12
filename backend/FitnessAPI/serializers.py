@@ -1,7 +1,7 @@
 from djoser import serializers as sr
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import UserFeedback, StepsCount, NutritionLog, MuscleGroups, Exercise, UserWorkoutLog
+from .models import UserFeedback, StepsCount, NutritionLog, MuscleGroups, Exercise, UserWorkoutLog, ExerciseSet
 User = get_user_model()
 
 class UserCreateSerializer(sr.UserCreateSerializer):
@@ -57,5 +57,12 @@ class UserWorkoutLogSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     class Meta:
         model = UserWorkoutLog
+        fields = '__all__'
+        depth = 2
+
+class ExerciseSetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ExerciseSet
         fields = '__all__'
         depth = 2

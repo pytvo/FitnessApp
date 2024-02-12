@@ -13,4 +13,5 @@ urlpatterns = [
     path('user/userworkout-log/', views.UserWorkoutLogView.as_view({'get':'get', 'post':'post'})),
     path('muscle-groups/', views.MuscleGroupAPIView.as_view()),
     path('exercises/', views.ExerciseAPIView.as_view()),
+    path('user/exercise-set/', views.ExerciseSetView.as_view({'get':'get'})) # later: {'post':'post'}
 ]
