@@ -4,10 +4,10 @@ from rest_framework.viewsets import ViewSet
 from rest_framework import status, permissions
 
 from djoser.views import UserViewSet
-from .serializers import UserFeedBackSerializer, StepsCountSerializer, NutritionLogSerializer, MuscleGroupSerializer, ExerciseSerializer
+from .serializers import UserFeedBackSerializer, StepsCountSerializer, NutritionLogSerializer, MuscleGroupSerializer, ExerciseSerializer, UserWorkoutLogSerializer
 
 
-from .models import UserFeedback, StepsCount, NutritionLog, MuscleGroups, Exercise
+from .models import UserFeedback, StepsCount, NutritionLog, MuscleGroups, Exercise, UserWorkoutLog
 class WelcomeView(APIView):
     def get(self, request):
         return Response({'Welcome to our Fitness App API, where you can find data required for frontend'})
@@ -104,3 +104,22 @@ class ExerciseAPIView(APIView):
         serializer = ExerciseSerializer(model, many=True)
 
         return Response(serializer.data)
+    
+
+class UserWorkoutLogView(ViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return UserWorkoutLog.objects.filter(user=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        model = self.get_queryset()
+        serializer = UserWorkoutLogSerializer(model, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, *args, **kwargs):
+        request.data['user'] = request.user.id
+        serializer = UserWorkoutLogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response({'Success':request.data}, status=status.HTTP_200_OK)

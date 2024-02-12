@@ -10,6 +10,7 @@ urlpatterns = [
                                                          'post':'create'})),
     path('user/nutritions/', views.NutritionLogViewSet.as_view({'get':'get',
                                                                 'post':'create'})),
+    path('user/userworkout-log/', views.UserWorkoutLogView.as_view({'get':'get', 'post':'post'})),
     path('muscle-groups/', views.MuscleGroupAPIView.as_view()),
-    path('exercises/', views.ExerciseAPIView.as_view())
+    path('exercises/', views.ExerciseAPIView.as_view()),
 ]
