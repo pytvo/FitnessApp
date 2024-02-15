@@ -1,4 +1,4 @@
-from djongo import models
+from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .manages import CustomUserManager
 from django.utils import timezone
@@ -19,15 +19,15 @@ class Sex(models.Model):
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
-    email = models.EmailField()
+    email = models.EmailField(default='')
     full_name = models.CharField(max_length=129)
-    country = models.CharField(max_length=120)
-    image = models.ImageField(upload_to='images/users/')
-    date_of_birth = models.DateField()
-    sex = models.ForeignKey(Sex, on_delete=models.PROTECT)
+    country = models.CharField(max_length=120, default='USA')
+    image = models.ImageField(upload_to='images/users/', blank=True, null=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    sex = models.ForeignKey(Sex, on_delete=models.PROTECT, blank=True, null=True)
 
-    weight = models.IntegerField()
-    height = models.IntegerField()
+    weight = models.IntegerField(default=0)
+    height = models.IntegerField(default=0)
     steps_target = models.IntegerField(default=12000)
     bmi = models.FloatField(default=0)
 

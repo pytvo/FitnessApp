@@ -22,6 +22,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'FitnessAPI',
+    "admin_interface",
+    "colorfield",
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -65,21 +67,21 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'FitnessApp.wsgi.application'
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+   
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'FitnessAppDB',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': "mongodb+srv://1olelllka:wUm86UPx3VXaUnBp@fitnesscluster.qr9t04p.mongodb.net/FitnessAppDB?ssl=true",
-            'username':'1olelllka',
-            'password':'wUm86UPx3VXaUnBp'
-        }  
+        'USER': 'root',
+        'PASSWORD': 'wUm86UPx3VXaUnBp',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
 
