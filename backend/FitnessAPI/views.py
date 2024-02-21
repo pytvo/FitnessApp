@@ -10,7 +10,7 @@ from .serializers import UserFeedBackSerializer, StepsCountSerializer, Nutrition
 from .models import UserFeedback, StepsCount, NutritionLog, MuscleGroups, Exercise, UserWorkoutLog, ExerciseSet
 class WelcomeView(APIView):
     def get(self, request):
-        return Response({'Welcome to our Fitness App API, where you can find data required for frontend'})
+        return Response({'Welcome to our FitnessApp API, where you can find data required for frontend'})
     
 
 class ActivationView(UserViewSet):
@@ -65,7 +65,9 @@ class StepsCountViewSet(ViewSet):
         return Response(serializer.data)
     
     def create(self, request, *args, **kwargs):
+        request.data._mutable = True
         request.data['user'] = request.user.id
+        request.data._mutable = False
         serializer = StepsCountSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -83,7 +85,9 @@ class NutritionLogViewSet(ViewSet):
         return Response(serializer.data)
     
     def create(self, request, *args, **kwargs):
+        request.data._mutable = True
         request.data['user'] = request.user.id
+        request.data._mutable = False
         serializer = NutritionLogSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -118,7 +122,9 @@ class UserWorkoutLogView(ViewSet):
         return Response(serializer.data)
     
     def post(self, request, *args, **kwargs):
+        request.data._mutable = True
         request.data['user'] = request.user.id
+        request.data._mutable = False
         serializer = UserWorkoutLogSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -126,7 +132,7 @@ class UserWorkoutLogView(ViewSet):
     
 
 class ExerciseSetView(ViewSet):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return ExerciseSet.objects.filter(log__user=self.request.user)

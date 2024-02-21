@@ -42,6 +42,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -120,7 +121,7 @@ SIMPLE_JWT = {
 
 EMAIL_USE_TLS =True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'email@gmail.com' # !!!!!! CHANGE THE CONFIGURATION WHEN DEV
+EMAIL_HOST_USER = 'somebody@gmail.com' # !!!!!! CHANGE THE CONFIGURATION WHEN DEV
 EMAIL_HOST_PASSWORD = 'somepass'  # !!!!!! CHANGE THE CONFIGURATION WHEN DEV
 EMAIL_PORT = 587
 

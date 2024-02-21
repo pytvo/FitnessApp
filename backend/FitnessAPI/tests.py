@@ -1,34 +1,81 @@
 from django.test import TestCase
 from .models import *
-
+from rest_framework_simplejwt.tokens import AccessToken
 
 class UrlTest(TestCase):
+
+    def setUp(self):
+        self.superuser = User.objects.create(username='user', password='123456', is_active=True, is_staff=True, is_superuser=True)
+        self.user = User.objects.create(username='user2', password='54231', is_active=True)
+        self.superaccess = AccessToken.for_user(self.superuser)
+        self.access = AccessToken.for_user(self.user)
     
     def test_homepage(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
+    
+    def test_swagger(self):
+        response = self.client.get('/swagger/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_user_info(self):
+        header = {'HTTP_AUTHORIZATION': f'JWT {self.access}'}
+        response = self.client.get('/auth/users/me/', **header)
+        self.assertEqual(response.status_code, 200)
+    
+    def test_user_auth(self):
+        data = {
+            'username':'someuser',
+            'password':'trtsskldjfsd',
+            'full_name':'user2',
+        }
+        response = self.client.post('/auth/users/', data=data)
+        self.assertEqual(response.status_code, 201)
 
     def test_exercises(self):
         response = self.client.get('/exercises/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_exercises_set(self):
+        header = {'HTTP_AUTHORIZATION': f'JWT {self.access}'}
+        response = self.client.get('/user/exercise-set/', **header)
         self.assertEqual(response.status_code, 200)
     
     def test_muscle_groups(self):
         response = self.client.get('/muscle-groups/')
         self.assertEqual(response.status_code, 200)
     
-    # TODO: create this test_feedback func and implement this approach to other urls if possible
-    # def test_feedback(self):
-    #     self.user = User.objects.create(username='testuser', password='password123', is_active=True)
-    #     login_data = {
-    #         'username': self.user.username,
-    #         'password': self.user.password,
-    #     }
-    #     user = self.client.post('/auth/jwt/create/', login_data)
-    #     print(user.content)
-    #     self.assertEqual(user.status_code, 200)
+    def test_feedback(self):
+        header = {'HTTP_AUTHORIZATION': f'JWT {self.superaccess}'}
+        response = self.client.get('/user/feedback/', **header)
+        self.assertEqual(response.status_code, 200)
+        header = {'HTTP_AUTHORIZATION': f'JWT {self.access}'}
+        response = self.client.get('/user/feedback/', **header)
+        self.assertEqual(response.status_code, 403)
+        response = self.client.post('/user/feedback/', data={'title':'some text'}, **header)
+        self.assertEqual(response.status_code, 200)
 
+    def test_steps(self):
+        header = {'HTTP_AUTHORIZATION': f'JWT {self.access}'}
+        response = self.client.get('/user/steps/', **header)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post('/user/steps/', {'count':12}, **header)
+        self.assertEqual(response.status_code, 200)
 
-    
+    def test_nutrition(self):
+        header = {'HTTP_AUTHORIZATION': f'JWT {self.access}'}
+        response = self.client.get('/user/nutritions/', **header)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post('/user/nutritions/', {'quantity':1, 'caloric_intake':1}, **header)
+        self.assertEqual(response.status_code, 200)
+
+    def test_userworkout_log(self):
+        header = {'HTTP_AUTHORIZATION': f'JWT {self.access}'}
+        response = self.client.get('/user/userworkout-log/', **header)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post('/user/userworkout-log/', {'count':12}, **header)
+        self.assertEqual(response.status_code, 200)
+
 class ModelTests(TestCase):
 
     def create_user(self, username='sample_user', password='sample_password', email='sample_email@gmail.com', full_name='sample_full_name', height=179, weight=71):
