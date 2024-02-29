@@ -25,13 +25,20 @@ export default function Body() {
           <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>14</Text>
         </View>
         <View className = "">
-          <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}} >CALORIES</Text>
-          <Text className = "font-semibold self-center" style = {{fontSize: hp(2), color: '#58ecdc'}}>604</Text>
+          {/* Average steps */}
+          <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}} >AVERAGE</Text>
+          <Text className = "font-semibold self-center" style = {{fontSize: hp(2), color: '#58ecdc'}}>10423</Text>
         </View>
         <View className = "">
           <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}}>DISTANCE</Text>
           <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>7.2km</Text>
         </View>
+      </View>
+      <View className = "mt-10 border-white border-2 rounded-xl" style = {{width: wp(95), height: hp(15)}}>
+        <Text> calories?</Text>
+      </View>
+      <View className = "mt-10 border-white border-2 rounded-xl" style = {{width: wp(95), height: hp(15)}}>
+        <Text> calories?</Text>
       </View>
     </View>
   )
