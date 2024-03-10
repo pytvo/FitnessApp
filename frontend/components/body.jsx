@@ -2,9 +2,11 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Flowchart from './flowchart'
+import RingProgress from './RingProgress';
+import { SimpleLineIcons } from '@expo/vector-icons';
 
-const goal = 6000;
-const steps = 15020;
+export const goal = 6000;
+export const steps = 15020;
 
 export default function Body() {
   return (
@@ -34,11 +36,16 @@ export default function Body() {
           <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>7.2km</Text>
         </View>
       </View>
-      <View className = "mt-10 border-white border-2 rounded-xl" style = {{width: wp(95), height: hp(15)}}>
-        <Text> calories?</Text>
-      </View>
-      <View className = "mt-10 border-white border-2 rounded-xl" style = {{width: wp(95), height: hp(15)}}>
-        <Text> calories?</Text>
+      <View className = "flex flex-row justify-between mt-10">
+        <View className = "flex border-neutral-500 border rounded-xl items-center justify-center" style = {{width: wp(43), height: hp(25)}}>
+          <Text className = "text-neutral-300 mb-4" style = {{fontSize: hp(2)}}><SimpleLineIcons name="fire" size={22} color="#737373" /> Calories</Text>
+          <RingProgress />
+          <Text className = "text-neutral-300 mt-2" style = {{fontSize: hp(2)}}> 2000</Text>
+          <Text className = "text-neutral-500" style = {{fontSize: hp(1.7)}}> Kcal</Text>
+        </View>
+        <View className = "flex border-neutral-500 border rounded-xl" style = {{width: wp(43), height: hp(25)}}>
+          <Text> BMI?</Text>
+        </View>
       </View>
     </View>
   )
