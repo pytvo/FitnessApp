@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .manages import CustomUserManager
 from django.utils import timezone
-
+from datetime import date
 
 # ! User and Related Stuff
 class Sex(models.Model):
@@ -34,6 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
+    calories_to_burn = models.IntegerField(default=0)
 
     USERNAME_FIELD = "username"
 
@@ -42,6 +43,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         if self.height and self.weight:
             self.bmi = round(self.weight / ((self.height/100)**2), 1)
+            age = (date.today() - self.date_of_birth).days
+            if self.sex.id and self.sex.id == 1:
+                self.calories_to_burn = (9.65 * self.weight) + (573 * (self.height/100)) - (5.08 * (age//365)) + 260
+            elif self.sex.id and self.sex.id == 2:
+                self.calories_to_burn = (7.38 * self.weight) + (607 * (self.height/100)) - (2.31 * (age//365)) + 43
         super(User, self).save(*args, **kwargs)
 
     def __str__(self):

@@ -3,8 +3,6 @@ import {React, useEffect, useState} from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 
 export default function Header(profile) {
-
-  console.log(profile['image'])
   
   return (
     <View className = "border-b-2 border-neutral-500 flex-row items-center" style = {{height: hp(6.5)}}>

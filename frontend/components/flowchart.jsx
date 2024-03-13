@@ -16,9 +16,9 @@ export default function Flowchart() {
     const today = getDayOfWeek();
 
     const steps = 10000;
-    const goal = 6000;
+    const goal = 12000;
 
-    const progressMon = Math.round((steps / goal * 100)/2.5);
+    const progressMon = Math.round(((steps / goal) * 100)/2.5);
     const limitedProgressMon = progressMon >= 86 ? 86 : progressMon;
     const progressTue = 50;
     const limitedProgressTue = progressTue >= 86 ? 86 : progressTue;

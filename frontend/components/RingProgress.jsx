@@ -9,7 +9,10 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const color = '#58ecdc';
 
-const RingProgress = ({radius = 50, strokeWidth = 20, progress = 0.2}) => {
+const RingProgress = (burn_cal, {radius = 50, strokeWidth = 20, progress = 0}) => {
+  if (burn_cal.calories_to_burn != undefined) {
+    progress = 1100 / burn_cal.calories_to_burn
+  }
   const innerRadius = radius - strokeWidth / 2  
   const circumference = 2 * Math.PI * innerRadius;
 

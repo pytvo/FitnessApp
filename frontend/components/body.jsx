@@ -5,10 +5,9 @@ import Flowchart from './flowchart'
 import RingProgress from './RingProgress';
 import { SimpleLineIcons } from '@expo/vector-icons';
 
-export const goal = 6000;
 export const steps = 15020;
 
-export default function Body() {
+export default function Body(profile) {
   return (
     <View className = "flex-1">
       <View className = "border-neutral-500 border-b-2 justify-center flex-row" style = {{height: hp(6.5)}}>
@@ -17,10 +16,10 @@ export default function Body() {
         </View>
         <View className = "items-end justify-center">
           <Text className = "text-neutral-300"> Today's goal</Text>
-          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>{goal}</Text>
+          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>{profile.profile.steps_target}</Text>
         </View>
       </View>
-      <Flowchart />
+      <Flowchart/>
       <View className = "border-neutral-500 border-b-2 justify-between flex-row items-center" style = {{height: hp(6)}}>
         <View className = "">
           <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}}>FLOORS</Text>
@@ -39,12 +38,13 @@ export default function Body() {
       <View className = "flex flex-row justify-between mt-10">
         <View className = "flex border-neutral-500 border rounded-xl items-center justify-center" style = {{width: wp(43), height: hp(25)}}>
           <Text className = "text-neutral-300 mb-4" style = {{fontSize: hp(2)}}><SimpleLineIcons name="fire" size={22} color="#737373" /> Calories</Text>
-          <RingProgress />
+          <RingProgress calories_to_burn={profile.profile.calories_to_burn}/>
           <Text className = "text-neutral-300 mt-2" style = {{fontSize: hp(2)}}> 2000</Text>
           <Text className = "text-neutral-500" style = {{fontSize: hp(1.7)}}> Kcal</Text>
         </View>
         <View className = "flex border-neutral-500 border rounded-xl" style = {{width: wp(43), height: hp(25)}}>
-          <Text> BMI?</Text>
+          <Text style={{fontSize: 30, color:'#fff'}}> BMI?</Text>
+          <Text style = {{fontSize: 25,color:'#fff'}}>{profile.profile.bmi}</Text>
         </View>
       </View>
     </View>

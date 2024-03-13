@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 export default function Home() {
   
   const [profile, setProfile] = useState({})
-  
+    
   useEffect(() => {
     fetch('http://localhost:8000/auth/jwt/create', {
       method: 'POST',
@@ -38,7 +38,7 @@ export default function Home() {
     <SafeAreaView style = {{flex: 1, backgroundColor: '#000'}}>
       <View style = {{flex: 1, width: wp(94), alignSelf: 'center', marginTop: Platform.OS === 'android' ? hp(1) : hp(0)}}>
           <Header name={profile.full_name} image={profile.image}/>
-          <Body />
+          <Body profile={profile}/>
       </View>
     </SafeAreaView>
   )
