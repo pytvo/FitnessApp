@@ -1,3 +1,4 @@
+from typing import Iterable
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .manages import CustomUserManager
@@ -60,8 +61,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 class UserWorkoutLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
-    duration = models.IntegerField()
-    calories = models.IntegerField()
+    duration = models.IntegerField(default=0)
+    calories = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username
@@ -134,7 +135,13 @@ class ExerciseSet(models.Model):
 
     def __str__(self):
         return f'User and Exercise: {self.log.user.username} —— {self.exercise.name}'
-    
+
+    def save(self, *args, **kwargs):
+        log = UserWorkoutLog.objects.get(id=self.log.id)
+        log.calories = self.exercise.cal_per_min * self.set_numb * log.duration
+        log.save()
+        super(ExerciseSet, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = 'Exercise Set'
         verbose_name_plural = 'Exercise Sets'
