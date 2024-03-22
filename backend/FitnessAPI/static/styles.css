@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+body {
+    background-image: url('./images/BLUE_GEOMETRIC_FLAT_LIQUID_BACKGROUND_generated.jpg');
+    background-size: 100%;
+}
+
+.style {
+    margin-top: 21%;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    font-size: 220%;
+    color: #35aed6;
+}
+
+.link {
+    text-decoration: none;
+    color: #35aed6;
+    font-size: 150%;
+    font-weight: 600;
+}

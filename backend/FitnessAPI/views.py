@@ -8,10 +8,6 @@ from .serializers import UserFeedBackSerializer, StepsCountSerializer, Nutrition
 
 
 from .models import UserFeedback, StepsCount, NutritionLog, MuscleGroups, Exercise, UserWorkoutLog, ExerciseSet
-class WelcomeView(APIView):
-    def get(self, request):
-        return Response({'Welcome to our FitnessApp API, where you can find data required for frontend'})
-    
 
 class ActivationView(UserViewSet):
     def get_serializer(self, *args, **kwargs):
