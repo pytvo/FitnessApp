@@ -1,20 +1,19 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
   <title>{{flatpage.title}}</title>
+  <link rel="stylesheet" href="{% static 'css/activation.css' %}">
 </head>
 <body>
-  <div class="content">
+  <div class="container">
     <h1>{{flatpage.content}}</h1>
-    <br>
-    <a href="{% url 'schema-swagger-ui' %}" class="btn">-> Backend Links <-</a>
   </div>
-  <footer class="footer">
-    &copy; 2024  FitnessApp Inc.
+  <footer>
+    <p>&copy; 2024 FitnessApp Inc.</p>
   </footer>
 </body>
 </html>

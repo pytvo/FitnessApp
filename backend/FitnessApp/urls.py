@@ -28,8 +28,8 @@ urlpatterns = [
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path("", include("django.contrib.flatpages.urls")),
-    path('', include('FitnessAPI.urls'))
+    path('/', include("django.contrib.flatpages.urls")),
+    path('api/', include('FitnessAPI.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [path('i18n/', include('django.conf.urls.i18n'))]
