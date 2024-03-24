@@ -2,7 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework import status, permissions
-from django.shortcuts import redirect
+from django.shortcuts import render
+from django.http import HttpResponse
 
 from djoser.views import UserViewSet
 from .serializers import UserFeedBackSerializer, StepsCountSerializer, NutritionLogSerializer, MuscleGroupSerializer, ExerciseSerializer, ExerciseSetSerializer, UserWorkoutLogSerializer
@@ -21,7 +22,7 @@ class ActivationView(UserViewSet):
     
     def activation(self, request, *args, **kwargs):
         super().activation(request, *args, **kwargs)
-        return redirect('/activation/')
+        return render(request,  'activation.html')
     
 
 class UserFeedbackViewset(ViewSet):
