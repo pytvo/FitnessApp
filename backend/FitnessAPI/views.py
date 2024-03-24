@@ -21,8 +21,11 @@ class ActivationView(UserViewSet):
         return serializer_class(*args, **kwargs)
     
     def activation(self, request, *args, **kwargs):
-        super().activation(request, *args, **kwargs)
-        return render(request,  'activation.html')
+        try:
+            super().activation(request, *args, **kwargs)
+            return render(request,  'activation.html')
+        except:
+            return render(request,  'error.html')
     
 
 class UserFeedbackViewset(ViewSet):
