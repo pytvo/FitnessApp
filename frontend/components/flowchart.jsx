@@ -3,10 +3,12 @@ import React, { useEffect } from 'react'
 import Svg, { Rect, G, TSpan } from 'react-native-svg'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated'
+import useHealthDate from '../hooks/useHealthData'
 
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
 
 export default function Flowchart() {
+    const {steps} = useHealthDate();
     const getDayOfWeek = () => {
         const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
         const today = new Date().getDay(); // 0 for Sunday, 1 for Monday, and so on
@@ -15,7 +17,6 @@ export default function Flowchart() {
     const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     const today = getDayOfWeek();
 
-    const steps = 10000;
     const goal = 6000;
 
     const progressMon = Math.round((steps / goal * 100)/2.5);

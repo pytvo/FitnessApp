@@ -4,12 +4,15 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Flowchart from './flowchart'
 import RingProgress from './RingProgress';
 import { SimpleLineIcons, FontAwesome5 } from '@expo/vector-icons';
+import useHealthDate from '../hooks/useHealthData';
 
 export const goal = 6000;
-export const steps = 15020;
 const BMI = 40;
 
+
+
 export default function Body() {
+  const {steps, flights, distance, calories} = useHealthDate();
   return (
     <View className = "flex-1">
       <View className = "border-neutral-500 border-b-2 justify-center flex-row" style = {{height: hp(6.5)}}>
@@ -25,7 +28,7 @@ export default function Body() {
       <View className = "border-neutral-500 border-b-2 justify-between flex-row items-center" style = {{height: hp(6)}}>
         <View className = "">
           <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}}>FLOORS</Text>
-          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>14</Text>
+          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>{flights}</Text>
         </View>
         <View className = "">
           {/* Average steps */}
@@ -34,7 +37,7 @@ export default function Body() {
         </View>
         <View className = "">
           <Text className = "text-neutral-300 font-semibold" style = {{fontSize: hp(1.2)}}>DISTANCE</Text>
-          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>7.2km</Text>
+          <Text className = "font-semibold" style = {{fontSize: hp(2), color: '#58ecdc'}}>{Math.floor(distance)}</Text>
         </View>
       </View>
       <View className = "flex flex-row justify-between mt-10">
@@ -42,7 +45,7 @@ export default function Body() {
         <View className = "flex border-neutral-500 border rounded-xl items-center justify-center" style = {{width: wp(43), height: hp(25)}}>
           <Text className = "text-neutral-300 mb-4" style = {{fontSize: hp(2)}}><SimpleLineIcons name="fire" size={22} color="#737373" /> Calories</Text>
           <RingProgress />
-          <Text className = "text-neutral-300 mt-2" style = {{fontSize: hp(2)}}> 2000</Text>
+          <Text className = "text-neutral-300 mt-2" style = {{fontSize: hp(2)}}> {calories}</Text>
           <Text className = "text-neutral-500" style = {{fontSize: hp(1.7)}}> Kcal</Text>
         </View>
         <View className = "flex border-neutral-500 border rounded-xl items-center justify-between" style = {{width: wp(43), height: hp(25)}}>
